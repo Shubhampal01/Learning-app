@@ -6,7 +6,6 @@ export const register = async(req,res)=>{
     try {
         const{name,email,password} = req.body;
         let user = await User.findOne({email});
-        console.log(user);
         if(user){
             return res.status(400).json({message:"User already exists"})
         }
@@ -25,6 +24,7 @@ export const register = async(req,res)=>{
         const data = {
             name,otp
         }
+        console.log(data)
         await sendMail(email,"E learning",data);
         res.status(200).json({message:"OTP send to your email",activationCode})
     } catch (error) {

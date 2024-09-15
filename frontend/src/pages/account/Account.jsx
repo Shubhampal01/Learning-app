@@ -1,6 +1,7 @@
 import React from 'react'
-
+import {useSelector} from "react-redux"
 function Account() {
+  const userData = useSelector((state) => state.auth.userData);
   return (
 <div className="account-page bg-gray-100 min-h-screen py-10">
   <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8">
@@ -29,7 +30,7 @@ function Account() {
             <input
               type="text"
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-              value="John Doe"
+              value={userData.name}
               disabled
             />
           </div>
@@ -38,7 +39,7 @@ function Account() {
             <input
               type="email"
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-              value="johndoe@example.com"
+              value={userData.email}
               disabled
             />
           </div>

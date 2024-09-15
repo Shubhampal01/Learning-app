@@ -1,27 +1,36 @@
 import React,{useState} from 'react'
 import {Link,useNavigate} from "react-router-dom"
 import {Container, Logo} from "../index"
+import { useSelector } from 'react-redux'
+import {Button,LogoutBtn} from '../index'
 function Header() {
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+    const isActive = useSelector(state => state.auth.isLoggedIn);
     const navItems = [
         {
             name:"Home",
-            link:"/"
+            link:"/",
+            isActive:true
+
         },
         {
             name:"Courses",
-            link:"/courses"
+            link:"/courses",
+            isActive:true
         },
         {
             name:"About",
-            link:"/about"
+            link:"/about",
+            isActive:true
         },
         {
             name:"Account",
-            link:"/account"
+            link:"/account",
+            isActive:isActive
         },
     ]
   return (
@@ -39,18 +48,20 @@ function Header() {
             <ul className='hidden md:flex space-x-4'>
                 {
                     navItems.map((item) => (
-                        <li key={item.name}>
+                        item.isActive?<li key={item.name}>
                             <Link 
                                 to={item.link} 
                                 className='inline-block px-4 py-2 text-gray-600 hover:text-blue-600 transition duration-200'>
                                 {item.name}
                             </Link>
-                        </li>
+                        </li>:null
                     ))
                 }
             </ul>
+            {!isActive?<Button className='px-10 hidden md:flex ' onClick={()=>navigate('/login')}>Login</Button>:null}
+            {isActive?<LogoutBtn/>:null}
 
-            {/* Menu Button */}
+            {/* Mobile Menu Button */}
             <div className="md:hidden">
                 <button onClick={toggleMenu} className="text-white">
                     <i className="fas fa-bars"></i>
@@ -63,12 +74,12 @@ function Header() {
             <ul className="flex flex-col space-y-1">
                 {
                     navItems.map((item) => (
-                        <li key={item.name}>
+                        item.isActive?<li key={item.name}>
                             <Link to={item.link} 
                                 className='block px-4 py-2 text-center text-gray-600 bg-blue-200 hover:bg-blue-300 transition duration-200'>
                                 {item.name}
                             </Link>
-                        </li>
+                        </li>:null
                     ))
                 }
             </ul>

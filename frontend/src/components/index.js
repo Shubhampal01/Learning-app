@@ -5,4 +5,6 @@ import Container from "./container/Container";
 import Input from "./Input";
 import Button from "./Button";
 import Testimonial from "./testimonials/Testimonial";
-export { Logo, Header, Footer, Container,Input,Button,Testimonial };
+import LogoutBtn from "./LogoutBtn";
+import Loader from "./Loader";
+export { Logo, Header, Footer, Container,Input,Button,Testimonial ,LogoutBtn,Loader};

@@ -1,28 +1,52 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {Link, useNavigate} from'react-router-dom'
 import {Input, Button } from '../../components';
 import {useForm} from 'react-hook-form'
 import userService from '../../service/userService';
 import {login as userLogin} from '../../store/authSlice';
-import toast,{Toaster} from 'react-hot-toast'; 
+import {toast,Bounce} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {useDispatch} from 'react-redux';
 
 function Login() {
     const navigate = useNavigate();
     const {register,handleSubmit} = useForm();
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
     const login = async(data)=>{
         try {
+            setLoading(true);
             const userData = await userService.login(data);
-            console.log(userData);
             if(userData){
-                toast.success(`Login successful ${userData.message}`);
-                localStorage.setItem("token",userData.token)
                 dispatch(userLogin(userData.user));
+                localStorage.setItem("token",userData.token);
+                toast.success(' Login Successful!', {
+                    position: "top-center",
+                    autoClose: 4000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                    });
                 navigate('/');
             }
+            setLoading(false);
         } catch (error) {
-            toast.error(error.message.data.message)
+            setLoading(false);
+            toast.error(' Invalid credentials!', {
+                position: "top-center",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+                });
         }
     }
 
@@ -30,6 +54,7 @@ function Login() {
     <div
     className='flex items-center justify-center w-full pt-20'
     >
+        {/* login form */}
         <div className={`mx-auto w-full max-w-lg bg-gray-100 
         rounded-xl p-10 border border-black/10`}
         >
@@ -72,7 +97,8 @@ function Login() {
                         <Button
                             type='submit'
                             className='w-full'
-                        >Sign in</Button>
+                            disabled={loading}
+                        >{loading?"Please wait..":"Sign in"}</Button>
                     </div>
             </form>
         </div>

@@ -3,16 +3,46 @@ import React from 'react'
 import {Link, useNavigate} from'react-router-dom'
 import {Input, Button } from '../../components';
 import {useForm} from 'react-hook-form'
+import {toast,Bounce} from 'react-toastify';
+import userService from '../../service/userService';
 
 function Verify() {
   const {register,handleSubmit} = useForm();
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
+    const [loading,setLoading] = useState(false);
   const verifyOTP = async(data) =>{
     try{
-        
+        setLoading(true);
+        const response = await userService.verifyOTP(data);
+        if(response){
+            toast.success("Account created successfully", {
+                position: "top-center",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+                });
+            navigate('/login');
+            localStorage.clear("activationCode");
+        }
+        setLoading(false);
     }catch(error){
-        setError('Something went wrong');
+        setLoading(false);
+        toast.error( error.response.data.message, {
+            position: "top-center",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+            });
     }
   }
   return (
@@ -25,8 +55,6 @@ function Verify() {
             <h2 className="text-center text-2xl font-bold leading-tight">
                 Verify account
             </h2>
-            {error && <p className='text-red-600 mt-8 text-center'>
-                {error}</p>}
             <form onSubmit={handleSubmit(verifyOTP)}
                 className = 'mt-8'>
                     <div className="space-y-5">
@@ -34,14 +62,15 @@ function Verify() {
                             label = "OTP : "
                             type = "password"
                             placeholder = "Enter OTP"
-                            {...register("password",{
+                            {...register("otp",{
                                 required:true,
                             })}
                         />
                         <Button
                             type='submit'
                             className='w-full'
-                        >Verify</Button>
+                            disabled={loading}
+                        >{loading?"Please wait..":"Verify"}</Button>
                     </div>
             </form>
             <p className="mt-2 text-center text-base text-black/60">
