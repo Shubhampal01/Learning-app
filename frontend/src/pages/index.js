@@ -4,5 +4,10 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Verify from "./auth/Verify";
 import Account from "./account/Account";
-
-export { About,Home,Login,Register,Verify, Account}
+import CourseDesc from "./courseDescription/CourseDesc";
+import PaymentSuccess from "./payment-success/PaymentSuccess";
+import Dashboard from "./dashboard/Dashboard";
+import CourseStudy from "./coursestudy/CourseStudy";
+import CourseEdit from "./CourseEdit/CourseEdit";
+import AdminDashBoard from "../admin/dashboard/AdminDashBoard";
+export { About,Home,Login,Register,Verify, Account,CourseDesc,PaymentSuccess,Dashboard,CourseStudy,CourseEdit,AdminDashBoard}

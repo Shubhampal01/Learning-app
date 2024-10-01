@@ -10,10 +10,10 @@ import cors from "cors";
 dotenv.config({
     path:"./.env"
 })
-export const razorpayInstance = new razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET
-})
+// export const razorpayInstance = new razorpay({
+//     key_id: process.env.RAZORPAY_KEY_ID,
+//     key_secret: process.env.RAZORPAY_KEY_SECRET
+// })
 const app = express();
 const port = process.env.PORT || 5000;
 app.use(cors())

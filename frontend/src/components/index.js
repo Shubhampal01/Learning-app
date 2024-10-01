@@ -7,4 +7,5 @@ import Button from "./Button";
 import Testimonial from "./testimonials/Testimonial";
 import LogoutBtn from "./LogoutBtn";
 import Loader from "./Loader";
-export { Logo, Header, Footer, Container,Input,Button,Testimonial ,LogoutBtn,Loader};
+import CourseCard from "./CourseCard";
+export { Logo, Header, Footer, Container,Input,Button,Testimonial ,LogoutBtn,Loader,CourseCard};

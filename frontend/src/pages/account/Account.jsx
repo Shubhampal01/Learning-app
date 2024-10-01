@@ -1,7 +1,9 @@
 import React from 'react'
 import {useSelector} from "react-redux"
+import { useNavigate } from 'react-router-dom'
 function Account() {
   const userData = useSelector((state) => state.auth.userData);
+  const navigate = useNavigate();
   return (
 <div className="account-page bg-gray-100 min-h-screen py-10">
   <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8">
@@ -43,9 +45,25 @@ function Account() {
               disabled
             />
           </div>
+          <div className='flex flex-col gap-4 sm:flex-row'>
+          <button 
+            onClick={() => navigate(`/${userData._id}/dashboard`)} 
+            className="bg-green-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-green-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          >
+            Go to Dashboard
+          </button>
+          { userData && userData.role === 'admin' && (
+            <button
+              onClick={() => navigate(`/admin/dashboard`)}
+              className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            >
+              Admin panel
+            </button>
+          )
+          }
+          </div>
         </div>
       </div>
-
     </div>
   </div>
   )
