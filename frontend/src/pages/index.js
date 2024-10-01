@@ -10,4 +10,7 @@ import Dashboard from "./dashboard/Dashboard";
 import CourseStudy from "./coursestudy/CourseStudy";
 import CourseEdit from "./CourseEdit/CourseEdit";
 import AdminDashBoard from "../admin/dashboard/AdminDashBoard";
-export { About,Home,Login,Register,Verify, Account,CourseDesc,PaymentSuccess,Dashboard,CourseStudy,CourseEdit,AdminDashBoard}
+import AddCourses from "../admin/addCourses/AddCourses";
+import Users from "../admin/users/Users";
+import Forgot from "./auth/Forgot";
+export { About,Home,Login,Register,Verify, Account,CourseDesc,PaymentSuccess,Dashboard,CourseStudy,CourseEdit,AdminDashBoard,AddCourses,Users,Forgot}

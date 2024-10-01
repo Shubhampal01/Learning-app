@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react'
 import {BrowserRouter,Routes, Route} from "react-router-dom"
-import { Home,Login,Register,Verify,About ,Account, CourseDesc, PaymentSuccess, Dashboard, CourseStudy, CourseEdit, AdminDashBoard} from './pages'
+import { Home,Login,Register,Verify,About ,Account, CourseDesc, PaymentSuccess, Dashboard, CourseStudy, CourseEdit, AdminDashBoard, AddCourses, Users, Forgot} from './pages'
 import { Header,Footer, Loader } from './components'
 import {login ,logout} from './store/authSlice'
 import {useDispatch } from 'react-redux';
@@ -47,6 +47,9 @@ function App() {
           <Route path='/verify' element={<AuthLayout authentication={false}>
             <Verify/>
             </AuthLayout>} />
+            <Route path='/forgot' element={<AuthLayout authentication={false}>
+            <Forgot/>
+            </AuthLayout>} />
           <Route path='/course/:id' element={<AuthLayout>
           <CourseDesc/>
           </AuthLayout>} />
@@ -64,6 +67,12 @@ function App() {
           </AuthLayout>} />
           <Route path='/admin/dashboard' element={<AuthLayout>
           <AdminDashBoard/>
+          </AuthLayout>} />
+          <Route path='/admin/course' element={<AuthLayout>
+          <AddCourses/>
+          </AuthLayout>} />
+          <Route path='/admin/users' element={<AuthLayout>
+          <Users/>
           </AuthLayout>} />
         </Routes>
         <Footer/>

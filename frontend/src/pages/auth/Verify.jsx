@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import React from 'react'
 import {Link, useNavigate} from'react-router-dom'
+import ReCAPTCHA from "react-google-recaptcha";
 import {Input, Button } from '../../components';
 import {useForm} from 'react-hook-form'
 import {toast,Bounce} from 'react-toastify';
@@ -9,7 +10,12 @@ import userService from '../../service/userService';
 function Verify() {
   const {register,handleSubmit} = useForm();
   const navigate = useNavigate();
-    const [loading,setLoading] = useState(false);
+  const [loading,setLoading] = useState(false);
+  const [show,setShow] = useState(false);
+  const onChange=(value)=>{
+    console.log("Captcha value:", value);
+    setShow(true);
+  }
   const verifyOTP = async(data) =>{
     try{
         setLoading(true);
@@ -66,11 +72,15 @@ function Verify() {
                                 required:true,
                             })}
                         />
-                        <Button
+                        <ReCAPTCHA
+                                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                                onChange={onChange}
+                            />
+                        {show && <Button
                             type='submit'
                             className='w-full'
                             disabled={loading}
-                        >{loading?"Please wait..":"Verify"}</Button>
+                        >{loading?"Please wait..":"Verify"}</Button>}
                     </div>
             </form>
             <p className="mt-2 text-center text-base text-black/60">

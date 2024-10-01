@@ -101,6 +101,9 @@ function Login() {
                         >{loading?"Please wait..":"Sign in"}</Button>
                     </div>
             </form>
+            <p className="mt-2 text-center text-base text-black/60" onClick={()=>navigate('/forgot')}>
+                Forgot password?&nbsp;
+            </p>
         </div>
     </div>
   )

@@ -64,6 +64,8 @@ function CourseEdit() {
       setDescription("");
       setVideo("");
       setVideoPreview("");
+      console.log(formData);
+      console.log(typeof formData);
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
